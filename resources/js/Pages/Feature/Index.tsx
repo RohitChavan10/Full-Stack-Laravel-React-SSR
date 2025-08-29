@@ -1,0 +1,28 @@
+import FeatureItem from '@/Components/FeatureItem';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import { Feature, PaginatedData } from '@/types';
+import { Head, Link } from '@inertiajs/react';
+
+export default function Index({features}:{features:PaginatedData<Feature>}) {
+    return (
+        <AuthenticatedLayout
+            header={
+                <h2 className="text-xl font-semibold leading-tight text-gray-800">
+                    Features
+                </h2>
+            }
+        >
+            <Head title="Features" />
+
+            <div className='mb-8'>
+            <Link href={route('feature.create')} className='inline-flex items-center rounded-md border border-transparent bg-gray-800 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white transition duration-150 ease-in-out hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:bg-gray-900'>
+            Create New Feature
+            </Link>
+            </div>
+
+            {features.data.map(feature=>(
+                    <FeatureItem feature={feature} key={feature.id}/>
+                   ))} 
+        </AuthenticatedLayout>
+    );
+}

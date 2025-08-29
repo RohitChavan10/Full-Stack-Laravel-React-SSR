@@ -4,9 +4,11 @@ namespace Database\Seeders;
 
 use App\Enum\PermissionsEnum;
 use App\Enum\RolesEnum;
+use App\Models\Feature;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -17,25 +19,25 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-     $userRole=Role::create(['name'=>RolesEnum::User->value]);
-     $commenterRole=Role::create(['name'=>RolesEnum::Commenter->value]);
-     $adminRole=Role::create(['name'=>RolesEnum::Admin->value]);
+    $userRole = Role::firstOrCreate(['name' => RolesEnum::User->value]);
+$commenterRole = Role::firstOrCreate(['name' => RolesEnum::Commenter->value]);
+$adminRole = Role::firstOrCreate(['name' => RolesEnum::Admin->value]);
 
-     $manageFeaturesPermission=Permission::create([
-        'name'=>PermissionsEnum::ManageFeatures->value,
-     ]);
+ $manageFeaturesPermission = Permission::firstOrCreate([
+    'name' => PermissionsEnum::ManageFeatures->value,
+]);
 
-      $manageCommentsPermission=Permission::create([
-        'name'=>PermissionsEnum::ManageComments->value,
-     ]);
+$manageCommentsPermission = Permission::firstOrCreate([
+    'name' => PermissionsEnum::ManageComments->value,
+]);
 
-      $manageUsersPermission=Permission::create([
-        'name'=>PermissionsEnum::ManageUsers->value,
-     ]);
+$manageUsersPermission = Permission::firstOrCreate([
+    'name' => PermissionsEnum::ManageUsers->value,
+]);
 
-      $upvoteDownvotePermission=Permission::create([
-        'name'=>PermissionsEnum::UpvoteDownvotes->value,
-     ]);
+$upvoteDownvotePermission = Permission::firstOrCreate([
+    'name' => PermissionsEnum::UpvoteDownvotes->value,
+]);
 
      $userRole->syncPermissions([$upvoteDownvotePermission]);
      $commenterRole->syncPermissions([$upvoteDownvotePermission,$manageCommentsPermission]);
@@ -49,18 +51,22 @@ class DatabaseSeeder extends Seeder
 
 
         User::factory()->create([
-            'name' => 'User User',
+            'name' => 'User',
             'email' => 'user@example.com',
         ])->assignRole(RolesEnum::User);
 
                 User::factory()->create([
-            'name' => 'Commenter User',
+            'name' => 'Commenter',
             'email' => 'commenter@example.com',
         ])->assignRole(RolesEnum::Commenter);
 
                 User::factory()->create([
-            'name' => 'Admin User',
+            'name' => 'Admin',
             'email' => 'admin@example.com',
         ])->assignRole(RolesEnum::Admin);
+
+        Feature::factory(100)->create();
     }
+
+
 }
