@@ -10,11 +10,11 @@ enum RolesEnum:string
     case User= 'user';
 
     public static function labels():array{
-        return [
-            self::Admin => 'Admin',
-            self::Commenter=>'Commenter',
-            self::User->value=> 'User',
-        ];
+         return [
+        self::Admin->value => 'Admin',
+        self::Commenter->value => 'Commenter',
+        self::User->value => 'User',
+    ];
     }
 
     

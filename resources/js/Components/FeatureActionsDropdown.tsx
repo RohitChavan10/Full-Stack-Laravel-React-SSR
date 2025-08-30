@@ -1,13 +1,15 @@
 import Dropdown from "@/Components/Dropdown";
+import { can } from "@/helpers";
 import {Feature} from "@/types";
 import {usePage} from "@inertiajs/react";
 
 export default function FeatureActionsDropdown({feature}: {feature: Feature}) {
   const user = usePage().props.auth.user;
 
-  if (!can(user, 'manage_features')) {
+  if(!can (user,'manage_features')){
     return;
   }
+
 
   return (
     <Dropdown>
@@ -17,8 +19,8 @@ export default function FeatureActionsDropdown({feature}: {feature: Feature}) {
               type="button"
               className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-400 dark:hover:text-gray-300"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className ="size-6">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
 </svg>
 
             </button>
@@ -31,7 +33,7 @@ export default function FeatureActionsDropdown({feature}: {feature: Feature}) {
         >
           Edit Feature 
         </Dropdown.Link>
-        <Dropdown.Link
+     <Dropdown.Link
           href={route('feature.destroy', feature.id)}
           method="delete"
           as="button"

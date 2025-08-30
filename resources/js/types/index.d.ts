@@ -6,12 +6,20 @@ export interface User {
     email: string;
     email_verified_at?: string;
     permissions:string[];
-    roles:string[]
+    roles:string[];
+    created_at:string;
 }
 
 export type PaginatedData <T = any> ={
     data: T[];
     links: Record<string, string>
+}
+
+export type Comment ={
+    id:number;
+    comment:string;
+    created_at:string;
+    user:User;
 }
 
 export type Feature = {
@@ -20,6 +28,10 @@ export type Feature = {
     description:string;
     user:User;
     created_at:string;
+    upvote_count:number;
+    user_has_upvoted:boolean;
+    user_has_downvoted:boolean;
+    comments:Comment[]
 }
 
 export type PageProps<
