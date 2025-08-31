@@ -78,7 +78,7 @@ if(ev.target.checked){
                 id="name"
                 disabled
                 className="mt-1 block w-full"
-                value={data.name}
+                value={data.roles}
                 onChange={(e) => setData('name', e.target.value)}
                 required
                 isFocused
